@@ -3,7 +3,12 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
-import 'package:flamo/fly.dart';
+import 'package:flamo/components/fly.dart';
+import 'package:flamo/components/house-fly.dart';
+import 'package:flamo/components/agile-fly.dart';
+import 'package:flamo/components/drooler-fly.dart';
+import 'package:flamo/components/hungry-fly.dart';
+import 'package:flamo/components/macho-fly.dart';
 import 'package:flamo/components/backyard.dart';
 
 class LangawGame extends Game {
@@ -32,10 +37,25 @@ class LangawGame extends Game {
   }
 
   void spawnFly() {
-    double x = rnd.nextDouble() * (screenSize.width - tileSize);
-    double y = rnd.nextDouble() * (screenSize.height - tileSize);
-    print('x = $x , y = $y');
-    flies.add(Fly(this, x, y));
+    double x = rnd.nextDouble() * (screenSize.width - (tileSize * 2.025));
+    double y = rnd.nextDouble() * (screenSize.height - (tileSize * 2.025));
+    switch (rnd.nextInt(5)) {
+      case 0:
+        flies.add(HouseFly(this, x, y));
+        break;
+      case 1:
+        flies.add(DroolerFly(this, x, y));
+        break;
+      case 2:
+        flies.add(AgileFly(this, x, y));
+        break;
+      case 3:
+        flies.add(MachoFly(this, x, y));
+        break;
+      case 4:
+        flies.add(HungryFly(this, x, y));
+        break;
+    }
   }
 
   void render(Canvas canvas) {
